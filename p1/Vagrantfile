@@ -21,16 +21,18 @@ Vagrant.configure("2") do |config|
     vb.cpus = 1
   end
 
+  config.vm.synced_folder "./confs", "/home/vagrant/shared", create: true
+
   # Server machine
   config.vm.define "rsabbahS" do |conf|
     conf.vm.hostname = "rsabbahS"
-    conf.vm.network "private_network", ip: CONFIG['server'][:ip], virtualbox__intnet: "eth1"
+    conf.vm.network "private_network", ip: CONFIG['server'][:ip]
   end
 
   # ServiceWorker machine
   config.vm.define "rsabbahSW" do |conf|
     conf.vm.hostname = "rsabbahSW"
-    conf.vm.network "private_network", ip: CONFIG['serviceWorker'][:ip], virtualbox__intnet: "eth1"
+    conf.vm.network "private_network", ip: CONFIG['serviceWorker'][:ip]
   end
 
 end
