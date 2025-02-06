@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Machines configuration
+CONFIG = {
+  'server' => {
+    ip: '192.168.56.110'
+  },
+  'serviceWorker' => {
+    ip: '192.168.56.111'
+  }
+}
+
+Vagrant.configure("2") do |config|
+  # Common configuration
+  config.vm.box = "hashicorp-education/ubuntu-24-04"
+  config.vm.box_version = "0.1.0"
+
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = 1024
+    vb.cpus = 1
+  end
+
+  # Server machine
+  config.vm.define "rsabbahS" do |conf|
+    conf.vm.hostname = "rsabbahS"
+    conf.vm.network "private_network", ip: CONFIG['server'][:ip], virtualbox__intnet: "eth1"
+  end
+
+  # ServiceWorker machine
+  config.vm.define "rsabbahSW" do |conf|
+    conf.vm.hostname = "rsabbahSW"
+    conf.vm.network "private_network", ip: CONFIG['serviceWorker'][:ip], virtualbox__intnet: "eth1"
+  end
+
+end
