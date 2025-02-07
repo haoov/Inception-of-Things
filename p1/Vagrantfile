@@ -35,4 +35,9 @@ Vagrant.configure("2") do |config|
     conf.vm.network "private_network", ip: CONFIG['serviceWorker'][:ip]
   end
 
+  config.vm.provision "shell" do |s|
+    s.path = "./scripts/install-dependencies.sh"
+    s.args = [CONFIG['server'][:ip]]
+  end
+
 end
