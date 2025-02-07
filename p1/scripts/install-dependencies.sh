@@ -1,7 +1,7 @@
 # Install required dependencies
 
 # Update package list
-apt-get updatek
+apt-get update
 
 # Install required packages
 apt-get install -y curl
